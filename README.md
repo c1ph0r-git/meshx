@@ -83,6 +83,10 @@ v           v
 
 ## PCB Motherboard
 
+Size: 61x84 mm
+Mounting holes: 1.6mm radius
+Layer stack up: 4 layer PCB with ground on both middle layers
+
 ![unpopulated](/gerber/unpopulated.png)
 ![populated](/gerber/populated.png)
 
