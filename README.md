@@ -39,6 +39,10 @@ v           v
 
 ---
 
+## Schematic Diagram
+
+![schematic](/schematic/schematic.png)
+
 ## System Pinout Reference (nRF52840 SuperMini)
 
 | Functional Block | Signal Name | MCU / Schematic Net | nRF52840 GPIO / Pin | Description / Notes |
@@ -76,10 +80,6 @@ v           v
 | | `3-RES` | SPI Bus / Control | P0.21 | E-Paper display reset line |
 | | `3-DC` | SPI Bus / Control | P0.23 | E-Paper display Data/Command selection line |
 | | `3-CS` | SPI Bus / Control | P0.25 | E-Paper display SPI Chip Select line |
-
-## Schematic Diagram
-
-![schematic]("/schematic/schematic.png")
 
 
 ---
