@@ -77,6 +77,10 @@ v           v
 | | `3-DC` | SPI Bus / Control | P0.23 | E-Paper display Data/Command selection line |
 | | `3-CS` | SPI Bus / Control | P0.25 | E-Paper display SPI Chip Select line |
 
+
+![Schematic Diagram](meshx/schematic/SCH_Schematic Diagram_1-Main Schematic Diagram_2026-08-29.png)
+
+
 ---
 
 ## Compliance with Radio Emission Regulations
