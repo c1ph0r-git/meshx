@@ -83,14 +83,22 @@ v           v
 
 ## PCB Motherboard
 
-Size: 61x84 mm
-Mounting holes: 1.6mm radius
-Layer stack up: 4 layer PCB with ground on both middle layers
+Size: 61x84 mm.
+Mounting holes: 1.6mm radius.
+Layer stack up: 4 layer PCB with ground on both middle layers.
 
 ![unpopulated](/gerber/unpopulated.png)
 ![populated](/gerber/populated.png)
 
+---
+## Component Selection Rationale
 
+* **MCU Core (nRF52840 SuperMini):** Selected for its ultra-low deep sleep current draw, ARM Cortex-M4F core, native USB support, and Bluetooth Low Energy (BLE) capabilities.
+* **LoRa Modules (EBYTE E22-400M22S & E22-900M22S):** Built on the Semtech SX1262 core, offering up to +22 dBm transmit power, excellent sensitivity, and lower current consumption compared to legacy SX127x series modules. This module is widely used in industrial applications and therefore is robust and widely available. 
+* **Solar Charger (CN3163):** ESOP-8 solar power management IC featuring built-in internal adaptive MPPT performance for small photovoltaic panels. Compared to buck-boost MPPT alternatives it is more power efficient. Buck-boost chargers consume the power overhead of the MPTT in its circuit (small solar panel: MPPT efficiency gained lost by regulator in small current design). Moreover, it introduces less EMI noise to the sistem.
+* **Protection Circuitry (XB8089D0 & HX810T-3.08V):** Compact SOIC-8 battery protection IC combined with an accurate SOT-23 supervisor to eliminate deep discharge scenarios in unattended installations. Redundant and bypassable design for safety purposes.
+* **Sensor (BMP280):** Bosch BMP280 provides barometric pressure/temperature data for node telemetry.
+* **Haptics (SMD9018):** SMD passive buzzer and vibration motor provide audible and haptic alert capabilities.
 ---
 
 ## Compliance with Radio Emission Regulations
@@ -113,15 +121,6 @@ $$\text{EIRP (dBm)} = P_{\text{conducted}} (\text{dBm}) - L_{\text{cable}} (\tex
 
 ---
 
-## Component Selection Rationale
-
-* **MCU Core (nRF52840 SuperMini):** Selected for its ultra-low deep sleep current draw, ARM Cortex-M4F core, native USB support, and Bluetooth Low Energy (BLE) capabilities.
-* **LoRa Modules (EBYTE E22-400M22S & E22-900M22S):** Built on the Semtech SX1262 core, offering up to +22 dBm transmit power, excellent sensitivity, and lower current consumption compared to legacy SX127x series modules. This module is widely used in industrial applications and therefore is robust and widely available. 
-* **Solar Charger (CN3163):** ESOP-8 solar power management IC featuring built-in internal adaptive MPPT performance for small photovoltaic panels. Compared to buck-boost MPPT alternatives it is more power efficient. Buck-boost chargers consume the power overhead of the MPTT in its circuit (small solar panel: MPPT efficiency gained lost by regulator in small current design). Moreover, it introduces less EMI noise to the sistem.
-* **Protection Circuitry (XB8089D0 & HX810T-3.08V):** Compact SOIC-8 battery protection IC combined with an accurate SOT-23 supervisor to eliminate deep discharge scenarios in unattended installations. Redundant and bypassable design for safety purposes.
-* **Sensor (BMP280):** Bosch BMP280 provides barometric pressure/temperature data for node telemetry.
-* **Haptics (SMD9018):** SMD passive buzzer and vibration motor provide audible and haptic alert capabilities.
----
 
 ## Target Applications
 
