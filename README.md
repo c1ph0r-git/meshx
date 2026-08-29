@@ -79,7 +79,7 @@ v           v
 
 ## Schematic Diagram
 
-![schematic]("/schematic/SCH_Schematic_Diagram_1-Main Schematic Diagram_2026-08-29.png")
+![schematic]("/schematic/schematic.png")
 
 
 ---
