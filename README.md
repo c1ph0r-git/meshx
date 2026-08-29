@@ -1,6 +1,8 @@
 # MeshX: Solar-Powered Dual-Band LoRa Bridge
 
-**MeshX** is an autonomous, off-grid cross-band repeater and protocol bridge designed for MeshCore and Meshtastic communication networks. The name derives from **Mesh** (mesh networking) and **X**, representing both the cross-section between frequency bands and firmwares and an adaptable platform variable. Powered by a 5V 1W solar panel and a 2000mAh single-cell Li-ion/LiPo battery, MeshX enables continuous remote relay capabilities with extreme power efficiency.
+**MeshX** is an autonomous, off-grid cross-band repeater and protocol bridge designed for MeshCore and Meshtastic communication networks. The name derives from **Mesh** (mesh networking) and **X**, representing both the cross-section between frequency bands and firmwares and an adaptable platform variable. MeshX enables continuous remote relay capabilities with extreme power efficiency.
+
+Author: c1ph0r
 
 ---
 
@@ -30,10 +32,10 @@ v           v
 +---> Switched Power Gates (3.3V_1, 3.3V_2)
 ```
 
-1. **Solar Input:** 5V 1W panel connects via a 2-pin connector (`+SOL-`) and passes through the `SOLAR` slide switch (`SK12D07VG3`) to the `CN3163` charger.
+1. **Solar Input:** Designed for a 5V 1-2W solar panel connected via a 2-pin jst 1.25mm header (`+SOL-`) and passes through the `SOLAR` slide switch (`SK12D07VG3`) to the `CN3163` charger.
 2. **Charging & BMS:** The `CN3163` manages constant-current/constant-voltage (CC/CV) charging. The `XB8089D0` provides onboard Li-ion over-charge, over-discharge, and short-circuit protection.
 3. **Under-Voltage Lockout (UVLO):** An `HX810T-3.08V` voltage detector monitors `BATTERY_POSITIVE`. If battery voltage falls below 3.08V, it drives a P-MOSFET (`Q4`, `AO3401A`) to isolate `BATTERY_LOAD`.
-4. **Switched Power Rail Distribution:** MCU-controlled MOSFET power gates (`1-PMOS`, `2-PMOS`) control power rails `3.3V_1` and `3.3V_2`, allowing individual power-down of the 433MHz (`U3`) and 868MHz (`U4`) transceiver blocks when idle.
+4. **Switched Power Rail Distribution:** MCU-controlled MOSFET power gates (`1-PMOS`, `2-PMOS`) control power rails `3.3V_1` and `3.3V_2`, allowing individual power-down of the 433MHz (`U3`) and 868MHz (`U4`) transceiver blocks when idle, or isolation of peripherals while radio listening to drasticaly reduce quiescent battery consumption.
 
 ---
 
@@ -100,11 +102,11 @@ $$\text{EIRP (dBm)} = P_{\text{conducted}} (\text{dBm}) - L_{\text{cable}} (\tex
 ## Component Selection Rationale
 
 * **MCU Core (nRF52840 SuperMini):** Selected for its ultra-low deep sleep current draw, ARM Cortex-M4F core, native USB support, and Bluetooth Low Energy (BLE) capabilities.
-* **LoRa Modules (EBYTE E22-400M22S & E22-900M22S):** Built on the Semtech SX1262 core, offering up to +22 dBm transmit power, excellent sensitivity, and lower current consumption compared to legacy SX127x series modules.
-* **Solar Charger (CN3163):** ESOP-8 solar power management IC featuring built-in internal adaptive MPPT performance for small photovoltaic panels.
-* **Protection Circuitry (XB8089D0 & HX810T-3.08V):** Compact SOIC-8 battery protection IC combined with an accurate SOT-23 supervisor to eliminate deep discharge scenarios in unattended installations.
-* **Sensors & Haptics (BMP280, SMD9018):** Bosch BMP280 provides barometric pressure/temperature data for node telemetry; SMD passive buzzer and vibration motor provide audible and haptic alert capabilities.
-
+* **LoRa Modules (EBYTE E22-400M22S & E22-900M22S):** Built on the Semtech SX1262 core, offering up to +22 dBm transmit power, excellent sensitivity, and lower current consumption compared to legacy SX127x series modules. This module is widely used in industrial applications and therefore is robust and widely available. 
+* **Solar Charger (CN3163):** ESOP-8 solar power management IC featuring built-in internal adaptive MPPT performance for small photovoltaic panels. Compared to buck-boost MPPT alternatives it is more power efficient. Buck-boost chargers consume the power overhead of the MPTT in its circuit (small solar panel: MPPT efficiency gained lost by regulator in small current design). Moreover, it introduces less EMI noise to the sistem.
+* **Protection Circuitry (XB8089D0 & HX810T-3.08V):** Compact SOIC-8 battery protection IC combined with an accurate SOT-23 supervisor to eliminate deep discharge scenarios in unattended installations. Redundant and bypassable design for safety purposes.
+* **Sensor (BMP280):** Bosch BMP280 provides barometric pressure/temperature data for node telemetry.
+* **Haptics (SMD9018):** SMD passive buzzer and vibration motor provide audible and haptic alert capabilities.
 ---
 
 ## Target Applications
