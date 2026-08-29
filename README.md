@@ -12,7 +12,7 @@ Author: c1ph0r
 * **Solar Battery Management:** Onboard CN3163 solar charger paired with an integrated XB8089D0 Li-ion protection circuit.
 * **Hardware UVLO Protection:** Active hardware under-voltage lock-out (HX810T @ 3.08V reset) prevents deep discharge battery degradation.
 * **Switched Low-Side Power Gates:** Dedicated high-side AO3401A P-channel and SI2312CDS N-channel MOSFET gates for dynamic peripheral power management.
-* **Hardware Interface Support:** Onboard Bosch BMP280 environmental sensor, dual thumbwheel configuration switches, passive buzzer, vibration motor driver, SPI E-Paper display header, two I2C display headers, and a dedicated GPS module interface.
+* **Hardware Interface Support:** Onboard Bosch BME280 environmental sensor, dual thumbwheel configuration switches, passive buzzer, vibration motor driver, SPI E-Paper display header, two I2C display headers, and a dedicated GPS module interface.
 
 ---
 
@@ -42,8 +42,8 @@ Author: c1ph0r
 | | `2-RXEN` | GPIO Output | P0.15 | RX enable / RF switch control |
 | | `2-DIO1` | GPIO Interrupt | P0.14 | Radio 2 interrupt line |
 | | `2-PMOS` | Power Gate Control | P0.11 | Gate control for 3.3V_2 power rail (AO3401A) |
-| **Sensors & I2C** | `1-SDA` | I2C Bus 1 Data | P0.26 | Primary I2C data (BMP280 U2, OLED Header [1]) |
-| | `1-SCL` | I2C Bus 1 Clock | P0.31 | Primary I2C clock (BMP280 U2, OLED Header [1]) |
+| **Sensors & I2C** | `1-SDA` | I2C Bus 1 Data | P0.26 | Primary I2C data (BME280 U2, OLED Header [1]) |
+| | `1-SCL` | I2C Bus 1 Clock | P0.31 | Primary I2C clock (BME280 U2, OLED Header [1]) |
 | | `2-SDA` | I2C Bus 2 Data | P0.06 | Secondary I2C data (OLED Header [2], Expansion) |
 | | `2-SCL` | I2C Bus 2 Clock | P0.08 | Secondary I2C clock (OLED Header [2], Expansion) |
 | **User Controls** | `1-Button A/B/C` | Analog / GPIO Matrix | P0.04 | Thumbwheel array 1 input (QS-301-AGS5P U6) |
@@ -97,7 +97,7 @@ Layer stack up: 4 layer PCB with ground on both middle layers.
 * **LoRa Modules (EBYTE E22-400M22S & E22-900M22S):** Built on the Semtech SX1262 core, offering up to +22 dBm transmit power, excellent sensitivity, and lower current consumption compared to legacy SX127x series modules. This module is widely used in industrial applications and therefore is robust and widely available. 
 * **Solar Charger (CN3163):** ESOP-8 solar power management IC featuring built-in internal adaptive MPPT performance for small photovoltaic panels. Compared to buck-boost MPPT alternatives it is more power efficient. Buck-boost chargers consume the power overhead of the MPTT in its circuit (small solar panel: MPPT efficiency gained lost by regulator in small current design). Moreover, it introduces less EMI noise to the sistem.
 * **Protection Circuitry (XB8089D0 & HX810T-3.08V):** Compact SOIC-8 battery protection IC combined with an accurate SOT-23 supervisor to eliminate deep discharge scenarios in unattended installations. Redundant and bypassable design for safety purposes.
-* **Sensor (BMP280):** Bosch BMP280 provides barometric pressure/temperature data for node telemetry.
+* **Sensor (BME280):** Bosch BME280 provides barometric pressure/temperature data for node telemetry.
 * **Haptics (SMD9018):** SMD passive buzzer and vibration motor provide audible and haptic alert capabilities.
 ---
 
