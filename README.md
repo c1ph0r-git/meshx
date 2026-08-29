@@ -16,29 +16,6 @@ Author: c1ph0r
 
 ---
 
-## Power Path Architecture
-```
-Solar Panel (5V 1W) ---> [SOLAR Switch] ---> CN3163 Solar Charger
-|
-v
-[Battery 2000mAh] <---> XB8089D0 BMS Circuit <---> BATTERY_POSITIVE
-|
-+---> HX810T UVLO (3.08V Cutoff)
-|           |
-v           v
-+---> [NODE Switch] ---> BATTERY_LOAD
-|
-+---> nRF52840 MCU / Regulators
-+---> Switched Power Gates (3.3V_1, 3.3V_2)
-```
-
-1. **Solar Input:** Designed for a 5V 1-2W solar panel connected via a 2-pin jst 1.25mm header (`+SOL-`) and passes through the `SOLAR` slide switch (`SK12D07VG3`) to the `CN3163` charger.
-2. **Charging & BMS:** The `CN3163` manages constant-current/constant-voltage (CC/CV) charging. The `XB8089D0` provides onboard Li-ion over-charge, over-discharge, and short-circuit protection.
-3. **Under-Voltage Lockout (UVLO):** An `HX810T-3.08V` voltage detector monitors `BATTERY_POSITIVE`. If battery voltage falls below 3.08V, it drives a P-MOSFET (`Q4`, `AO3401A`) to isolate `BATTERY_LOAD`.
-4. **Switched Power Rail Distribution:** MCU-controlled MOSFET power gates (`1-PMOS`, `2-PMOS`) control power rails `3.3V_1` and `3.3V_2`, allowing individual power-down of the 433MHz (`U3`) and 868MHz (`U4`) transceiver blocks when idle, or isolation of peripherals while radio listening to drasticaly reduce quiescent battery consumption.
-
----
-
 ## Schematic Diagram
 
 ![schematic](/schematic/schematic.png)
@@ -80,6 +57,34 @@ v           v
 | | `3-RES` | SPI Bus / Control | P0.21 | E-Paper display reset line |
 | | `3-DC` | SPI Bus / Control | P0.23 | E-Paper display Data/Command selection line |
 | | `3-CS` | SPI Bus / Control | P0.25 | E-Paper display SPI Chip Select line |
+
+## Power Path Architecture
+```
+Solar Panel (5V 1W) ---> [SOLAR Switch] ---> CN3163 Solar Charger
+|
+v
+[Battery 2000mAh] <---> XB8089D0 BMS Circuit <---> BATTERY_POSITIVE
+|
++---> HX810T UVLO (3.08V Cutoff)
+|           |
+v           v
++---> [NODE Switch] ---> BATTERY_LOAD
+|
++---> nRF52840 MCU / Regulators
++---> Switched Power Gates (3.3V_1, 3.3V_2)
+```
+
+1. **Solar Input:** Designed for a 5V 1-2W solar panel connected via a 2-pin jst 1.25mm header (`+SOL-`) and passes through the `SOLAR` slide switch (`SK12D07VG3`) to the `CN3163` charger.
+2. **Charging & BMS:** The `CN3163` manages constant-current/constant-voltage (CC/CV) charging. The `XB8089D0` provides onboard Li-ion over-charge, over-discharge, and short-circuit protection.
+3. **Under-Voltage Lockout (UVLO):** An `HX810T-3.08V` voltage detector monitors `BATTERY_POSITIVE`. If battery voltage falls below 3.08V, it drives a P-MOSFET (`Q4`, `AO3401A`) to isolate `BATTERY_LOAD`.
+4. **Switched Power Rail Distribution:** MCU-controlled MOSFET power gates (`1-PMOS`, `2-PMOS`) control power rails `3.3V_1` and `3.3V_2`, allowing individual power-down of the 433MHz (`U3`) and 868MHz (`U4`) transceiver blocks when idle, or isolation of peripherals while radio listening to drasticaly reduce quiescent battery consumption.
+
+---
+
+## PCB Motherboard
+
+![unpopulated](/gerber/unpopulated.png)
+![populated](/gerber/populated.png)
 
 
 ---
